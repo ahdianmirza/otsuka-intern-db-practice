@@ -38,6 +38,10 @@ app.get("/customer-by-amount", async (req, res) => {
   let data = await query.getCustomerByAmount();
   res.status(200).json(data);
 });
+app.get("/count-by-language", async (req, res) => {
+  let data = await query.getMovieCountByLanguage();
+  res.status(200).json(data);
+});
 
 
 

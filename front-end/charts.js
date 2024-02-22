@@ -234,10 +234,52 @@ const customerByAmountChart = () => {
     });
 };
 
+const countByLanguageChart = () => {
+  // Fetch data from API count movie by categories
+  fetch("http://localhost:3000/count-by-language")
+    .then((response) => response.json())
+    .then((data) => {
+      let chartData = {
+        totalFilm: data[0].map((total) => total.total_film),
+        languages: data[0].map((language) => language.language),
+      };
+
+      const chartOptions = {
+        chart: {
+          type: "pie",
+          height: "100%",
+        },
+        series: chartData.totalFilm,
+        labels: chartData.languages,
+        dataLables: {
+          enabled: true,
+        },
+        title: {
+          text: "Movie Count by Language", // Update with desired title
+          align: "center",
+          style: {
+            fontSize: "18px",
+            fontWeight: "bold",
+          },
+        },
+      };
+
+      const chart = new ApexCharts(
+        document.querySelector("#movie-count-by-language"),
+        chartOptions
+      );
+      chart.render();
+    })
+    .catch((error) => {
+      console.log("Error:", error);
+    });
+};
+
 window.addEventListener('load', () => {
     exampleChart();
     topTenCustomerChart();
     countByCategoryChart();
     countByActorChart();
     customerByAmountChart();
+    countByLanguageChart();
 });

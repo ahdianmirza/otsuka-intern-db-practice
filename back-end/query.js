@@ -35,7 +35,10 @@ const query = {
     },
     getCustomerByAmount: async () => {
         return await database.raw(`select * from top_ten_customer_by_amount;`);
-    }
+    },
+    getMovieCountByLanguage: async () => {
+        return await database.raw(`select * from movie_count_by_language;`);
+    },
 };
 
 
